@@ -1,0 +1,92 @@
+Sub CreateIXBRLOutput()
+'
+' CreateIXBRLOutput Macro
+'
+' Keyboard Shortcut: Ctrl+i
+'
+    Sheets("Output").Select
+    Cells.Select
+    Selection.ClearContents
+    
+    Dim RowCounter As Integer
+    
+    RowCounter = 1
+    Range("A" + CStr(RowCounter)).Select
+    Application.Goto Reference:="iXBRLHeader"
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    RowCounter = RowCounter + Range("iXBRLHeader").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Application.Goto Reference:="StatementOfNetPosition"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    RowCounter = RowCounter + Range("StatementOfNetPosition").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Sheets("Resources").Select
+    Application.Goto Reference:="StatementOfActivities"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    RowCounter = RowCounter + Range("StatementOfActivities").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Sheets("Resources").Select
+    Application.Goto Reference:="GovernmentalFundsBalanceSheet"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    RowCounter = RowCounter + Range("GovernmentalFundsBalanceSheet").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Application.Goto Reference:="StatementOfRevsExpsAndFundBals"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    RowCounter = RowCounter + Range("StatementOfRevsExpsAndFundBals").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Application.Goto Reference:="InlineXBRLResources"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+            
+    RowCounter = RowCounter + Range("InlineXBRLResources").Rows.Count
+    Range("A" + CStr(RowCounter)).Select
+    Application.Goto Reference:="iXBRLFooter"
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Output").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+              
+    Sheets("Output").Cells.Select
+    Selection.Copy
+    Dim DataObj As New MSForms.DataObject
+    Dim i As Integer
+    Dim strOut As String
+    Dim strFile1 As String
+    DataObj.GetFromClipboard
+    strOut = DataObj.GetText
+    strFile1 = "WillCountyCAFR.html"
+    i = FreeFile
+    Open strFile1 For Binary Access Write As #i
+    Put #i, , strOut
+    Close #i
+    Application.CutCopyMode = False
+        
+End Sub
