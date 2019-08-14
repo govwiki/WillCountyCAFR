@@ -36,3 +36,19 @@ th {
   background-color: #555;
   color: white;
 }
+
+.noborder {
+  border: none;
+}
+.noborder td {
+  border: none;
+}
+
+.no-horizontal-border td {
+  border-top: none;
+  border-bottom: none;
+}
+
+td.border-bottom {
+  border-bottom: 1px solid black;
+}
