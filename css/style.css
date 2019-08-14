@@ -1,0 +1,38 @@
+body {
+  background-color: #eee;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#container {
+  margin: 0px auto;
+  width: 600px;
+  height: 500px;
+  background-color: #fff;
+}
+
+table {
+  width: 80%;
+  height: 500px;
+  border-collapse: collapse;
+  /*table-layout: fixed;*/
+  /*border-radius: 40px; - two square properties*/
+}
+
+table, th, td {
+  border: 0.5px black solid;
+}
+
+th {
+  height: 30px;
+  text-align: center;
+  vertical-align: center;
+}
+
+th, td {
+  padding: 5px;
+}
+
+th {
+  background-color: #555;
+  color: white;
+}
